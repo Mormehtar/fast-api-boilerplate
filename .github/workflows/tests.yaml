@@ -1,0 +1,44 @@
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  build:
+    name: Test and lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.13"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'poetry'
+      - name: Install dependencies
+        run: poetry install
+      - name: Lint
+        uses: astral-sh/ruff-action@v1
+        with:
+          changed-files: "true"
+          args: "format --check"
+      - name: Test
+        run: poetry run pytest --cov --cov-report term --cov-report xml:coverage.xml
+      - name: Produce the coverage report
+        uses: insightsengineering/coverage-action@v2
+        with:
+          threshold: 90
+          # Publish the rendered output as a PR comment
+          publish: true
+          # Create a coverage diff report.
+          diff: true
+          togglable-report: true
