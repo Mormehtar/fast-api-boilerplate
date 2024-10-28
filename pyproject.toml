@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "fastapibase"
+version = "0.1.0"
+description = ""
+authors = ["darkrider <mormehtar@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {version = "^0.115.4"}
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+fastapi = {extras = ["standard"], version = "^0.115.4"}
+ruff = "^0.7.1"
+pre-commit = "^4.0.1"
+httpx = "^0.27.2"
+anyio = "^4.6.2.post1"
+pytest-cov = "^5.0.0"
+pytest-xdist = "^3.6.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+target-version = "py312"
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = false
+docstring-code-line-length = "dynamic"
