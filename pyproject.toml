@@ -6,7 +6,7 @@ authors = ["darkrider <mormehtar@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.13"
 fastapi = {version = "^0.115.4"}
 
 
@@ -27,7 +27,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.ruff]
 line-length = 120
 indent-width = 4
-target-version = "py312"
+target-version = "py313"
 
 [tool.ruff.lint]
 fixable = ["ALL"]
