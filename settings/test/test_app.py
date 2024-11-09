@@ -9,9 +9,9 @@ def environment_settings():
     old_env = environ.get("ENV")
     environ["ENV"] = "blah!"
     yield
-    if old_env is not None:
+    if old_env is not None:  # pragma: no cover
         environ["ENV"] = old_env
-    else:
+    else:  # pragma: no cover
         environ.pop("ENV")
 
 
